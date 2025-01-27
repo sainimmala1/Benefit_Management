@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="userside">Benefits Management - USER SIDE</h1>
+    <p id="userpara">You cann't do any changes but you can request admin to do Changes</p>
+    <h1 id="adminside">Benefits Management - ADMIN SIDE</h1>
+    <p id="adminpara">You can do any changes (CRUD OPERATIONS)</p>
+    <button id="addBenefitButton" onclick="showAddBenefitForm()">Add Benefit</button>
+    <button onclick="logout()">Logout</button>
+    <br><br>
+    
+    <table id="benefitsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Benefit Name</th>
+                <th>Description</th>
+                <th>Eligibility Criteria</th>
+                <th>Coverage Amount</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <h2 id="requests-heading">User Requests</h2>
+    <p id="requestpara">These are the request sent by users, admin can approve, deny and remove</p>
+    <table id="requestsTable">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Action</th>
+                <th>Benefit ID</th>
+                <th>Benefit Name</th>
+                <th>Description</th>
+                <th>Eligibility Criteria</th>
+                <th>Coverage Amount</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Information</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>      
+     </table>
+
+    <!--  Benefit Form -->
+    <div id="overlayAddBenefit" class="overlay hidden">
+        <div id="addBenefitForm" class="popup-form">
+            <h2>Add New Benefit</h2>
+            <form onsubmit="submitNewBenefit(event)">
+                <input type="text" id="benefitId" placeholder="Benefit ID" required>
+                <input type="text" id="benefitName" placeholder="Benefit Name" required>
+                <input type="text" id="description" placeholder="Description" required>
+                <input type="text" id="eligibilityCriteria" placeholder="Eligibility Criteria" required>
+                <input type="number" id="coverageAmount" placeholder="Coverage Amount" required>
+                <input type="date" id="startDate" placeholder="Start Date" required>
+                <input type="date" id="endDate" placeholder="End Date" required>
+                <button type="submit">Confirm</button>
+                <button type="button" onclick="hideAddBenefitForm()">Cancel</button>
+            </form>   
+        </div>
+    </div>
+
+    <!-- Update Benefit Form -->
+    <div id="overlayUpdateBenefit" class="overlay hidden">
+        <div id="updateBenefitForm" class="popup-form">
+            <h2>Update Benefit</h2>
+            <form onsubmit="submitUpdatedBenefit(event)">
+                <input type="hidden" id="updateBenefitId">
+                <input type="text" id="updateBenefitName" placeholder="Benefit Name" required>
+                <input type="text" id="updateDescription" placeholder="Description" required>
+                <input type="text" id="updateEligibilityCriteria" placeholder="Eligibility Criteria" required>
+                <input type="number" id="updateCoverageAmount" placeholder="Coverage Amount" required>
+                <input type="date" id="updateStartDate" placeholder="Start Date" required>
+                <input type="date" id="updateEndDate" placeholder="End Date" required>
+                <button type="submit">Modify</button>
+                <button type="button" onclick="hideUpdateBenefitForm()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Benefit Confirmation -->
+    <div id="overlayDeleteBenefit" class="overlay hidden">
+        <div class="popup-form">
+            <h2>Confirm Deletion</h2>
+            <p>Are you sure you want to delete this benefit?</p>
+            <button id="confirmDeleteButton">Delete</button>
+            <button onclick="hideDeleteForm()">Cancel</button>
+        </div>
+    </div>
+    
+    <!-- Popup Form for Non-Admin Users -->
+<div id="requestFormOverlay" style="display: none;">
+    <div id="requestFormContainer">
+        <h2>Request Admin</h2>
+        <form id="requestForm">
+            <label for="userEmail">Email:</label>
+            <input type="text" id="userEmail" name="email"> <br>
+            <label for="requestAction">Action:</label>
+            <input type="text" id="requestAction" name="action"><br>
+            <label for="requestBenefitId">Benefit ID:</label>
+            <input type="number" id="requestBenefitId" name="benefit_id" placeholder="unique_Benefit_Id"><br>
+            <input type="text" id="requestBenefitName" name="benefit_name" placeholder="Benefit Name"><br>
+            <input type="text" id="requestDescription" name="description" placeholder="Description"><br>
+            <input type="text" id="requestEligibilityCriteria" name="eligibility_criteria" placeholder="Eligibility Criteria"><br>
+            <input type="number" id="requestCoverageAmount" name="coverage_amount" placeholder="Coverage Amount"><br>
+            <input type="date" id="requestStartDate" name="start_date" placeholder="Start Date"><br>
+            <input type="date" id="requestEndDate" name="end_date" placeholder="End Date"><br>
+            <span><label for="requestStatus">Status:</label>
+            <input type="text" id="requestStatus" name="status" value="pending"></span> <br>
+            <span>  <label for="requestCreatedAt">Created At:</label>
+            <input  id="requestCreatedAt" name="created_at" value=""></span><br>
+            <span>   <label for ="informaion">Information:</label>
+            <input id="information" name="information"  placeholder="Brief Info Respective to Action"></span> <br>
+            <span>  <button type="submit">Submit Request</button> 
+            <button type="button" onclick="hideRequestForm()">Cancel</button></span>
+        </form>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assigmnet-10</title>
+    <style>
+     body {
+    font-family: Arial, sans-serif;
+     background: url('https://t3.ftcdn.net/jpg/05/40/78/28/240_F_540782862_g9Xdkf0rE5H9c20koVChdjTU4ye2E6UL.jpg') no-repeat center center fixed; 
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+}
+
+.container {
+    background-color: #1E3A5F;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    height: 400px; 
+    max-width: 100%;
+    overflow: hidden; 
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s;
+    color: #FFFFFF;
+}
+
+.tab-button.active {
+    color: #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+}
+
+.tab-content {
+    display: none;
+    height: calc(100% - 50px); 
+}
+
+.tab-content.active {
+    display: flex; 
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+form h2 {
+    margin-bottom: 20px;
+    color: #FFFFFF;
+    border-bottom: 1px solid white;
+}
+
+form input, form select {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 14px;
+    
+}
+
+form input:focus {
+    outline: none; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+}
+
+form button {
+    padding: 10px;
+    border: none;
+    border-radius: 14px;
+    background-color: #FFFFFF;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: bold;
+    font-size: 110%;
+}
+
+form button:hover {
+    background-color: #000000; 
+    color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+                 0 0 20px rgba(255, 255, 255, 0.6), 
+                 0 0 30px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+                0 0 20px rgba(255, 255, 255, 0.6), 
+                0 0 30px rgba(255, 255, 255, 0.4);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('login')">Login</button>
+            <button class="tab-button" onclick="openTab('register')">Register</button>
+        </div>
+
+        <div id="login" class="tab-content active">
+            <form id="login-form">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <input type="email" id="login-email" name="email" required placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" name="password" required placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <select id="login-role" name="role" required >
+                        <option value="">Select Role</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+        <!-- Registration form -->
+        <div id="register" class="tab-content">
+            <form id="register-form">
+                <h2>Register</h2>
+                <div class="form-group">
+                    <select id="register-role" name="role" required>
+                        <option value="">Select Role</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="register-email" name="email" required placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="register-password" name="password" required placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="register-confirm-password" name="confirmPassword" required placeholder="Confirm Password">
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+
+            tabContents.forEach(tabContent => {
+                tabContent.classList.remove('active');
+            });
+
+            tabButtons.forEach(tabButton => {
+                tabButton.classList.remove('active');
+            });
+
+            document.getElementById(tabName).classList.add('active');
+            document.querySelector(`.tab-button[onclick="openTab('${tabName}')"]`).classList.add('active');
+        }
+
+        // Handle login form submission
+       document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    const role = document.getElementById('login-role').value;
+
+    try {
+        const response = await fetch('http://localhost:3000/api/v1/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password, role })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem('token', result.token);
+             localStorage.setItem('role', result.role);  
+            localStorage.setItem('email', email);
+            // Store the role in localStorage
+            alert('Login successful');
+            window.location.href = '/benefits.html'; // redirect to the main page
+        } else {
+            alert(result.message || 'Login failed');
+        }
+    } catch (error) {
+        console.error('Error during login:', error);
+        alert('An error occurred during login.');
+    }
+});
+
+        // Handle registration form submission
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            const role = document.getElementById('register-role').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/v1/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password, role })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert('Registration successful. Please log in.');
+                    openTab('login');
+                } else {
+                    alert(result.message || 'Registration failed');
+                }
+            } catch (error) {
+                console.error('Error during registration:', error);
+                alert('An error occurred during registration.');
+            }
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-form {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1000;
+}
+
+#addBenefitForm, #updateBenefitForm {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 300px;
+}
+
+#addBenefitForm input, #updateBenefitForm input {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#addBenefitForm button, #updateBenefitForm button {
+    width: 100%;
+    padding: 9px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#addBenefitForm button:hover, #updateBenefitForm button:hover {
+    background-color: #45a049;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.action-buttons button {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.delete-button {
+    background-color: #f44336;
+}
+
+.delete-button:hover {
+    background-color: #e53935;
+}
+
+.update-button {
+    background-color: #2196F3;
+}
+
+.update-button:hover {
+    background-color: #1e88e5;
+}
+
+.hidden {
+    display: none;
+}       
+
+#requestFormOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#requestFormContainer {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+}
+
+#requestFormContainer h2 {
+    margin-bottom: 20px;
+}
+
+#requestFormContainer form {
+    display: flex;
+    flex-direction: column;
+}
+
+#requestFormContainer form button {
+    margin-top: 10px;
+}
+
+#requestsTable, #requests-heading , #adminside,#adminpara, #requestpara {
+    text-align: center;
+    display: none;
+}
+#userpara {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+#adminside {
+    display: none; 
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: 90%;
+    max-width: 1200px;
+}
+
+
+#requests-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+#requestsTable {
+    width: 100%;
+    border-collapse: collapse; 
+    margin: 0 auto;
+}
+
+
+#requestsTable th {
+    background-color: #007bff;
+    color: white; 
+    padding: 10px;
+    border: 1px solid #ddd; 
+}
+
+
+#requestsTable td, #requestsTable th {
+    padding: 8px;
+    border: 1px solid #ddd; 
+}
+
+#requestsTable tr:nth-child(even) {
+    background-color: #f2f2f2; 
+}
+
+
+#requestsTable tr:hover {
+    background-color: #e0e0e0; 
+}
+
+
+#requestsTable button {
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer; 
+    margin: 5px;
+}
+
+#requestsTable button:hover {
+    background-color: #0056b3;
+    
+}
+#requestsTable {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#requestFormContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px; 
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    max-height: 90vh; 
+    overflow-y: auto; 
+}
